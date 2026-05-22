@@ -1,0 +1,145 @@
+.country-detail {
+  padding: 40px 0;
+}
+
+.detail-hero {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.detail-flag {
+  flex-shrink: 0;
+  width: 280px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.detail-flag img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.detail-headline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.detail-name {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.detail-official {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.detail-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fav-toggle-btn {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.btn-warning {
+  background: var(--warning);
+  color: #000;
+  border: none;
+}
+.btn-warning:hover {
+  opacity: 0.85;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.detail-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.detail-card-wide {
+  grid-column: 1 / -1;
+}
+
+.detail-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+.detail-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.detail-row span {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.detail-row strong {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
+}
+
+.border-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.border-tag {
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .detail-hero {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .detail-flag {
+    width: 100%;
+  }
+  .detail-name {
+    font-size: 28px;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .detail-card-wide {
+    grid-column: 1;
+  }
+}
