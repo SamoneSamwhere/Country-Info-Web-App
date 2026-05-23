@@ -27,16 +27,31 @@ export default function CountryPage() {
   }, [code]);
 
   return (
-    <div className="container" style={{ paddingTop: '24px' }}>
+    <div className="container" style={{ paddingTop: '32px' }}>
       <button
         className="btn btn-ghost"
         onClick={() => navigate(-1)}
-        style={{ marginBottom: '16px' }}
+        style={{ marginBottom: '28px', gap: '8px' }}
       >
         ← Back
       </button>
-      {loading && <div className="spinner" />}
-      {error && <p style={{ color: 'var(--danger)', padding: '40px 0' }}>{error}</p>}
+      {loading && (
+        <div className="spinner-wrap">
+          <div className="spinner" />
+          <span className="spinner-text">Loading country…</span>
+        </div>
+      )}
+      {error && (
+        <div style={{
+          textAlign: 'center',
+          padding: '80px 20px',
+          color: 'var(--text-muted)'
+        }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌐</div>
+          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '8px' }}>Country Not Found</h3>
+          <p style={{ color: 'var(--danger)' }}>{error}</p>
+        </div>
+      )}
       {country && <CountryDetail country={country} />}
     </div>
   );

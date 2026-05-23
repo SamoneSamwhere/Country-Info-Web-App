@@ -1,60 +1,79 @@
 .compare-panel {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  margin-top: 32px;
+  margin-top: 16px;
+  animation: fadeUp 0.4s ease;
 }
 
 .compare-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 20px;
-  padding: 32px;
+  gap: 24px;
+  padding: 36px;
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.compare-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108,99,255,0.3), transparent);
 }
 
 .compare-flag-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-align: center;
 }
 
 .compare-flag-col img {
-  width: 140px;
-  height: 90px;
+  width: 150px;
+  height: 96px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .compare-flag-col h2 {
   font-size: 18px;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
-.compare-vs {
+.compare-vs-badge {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--accent);
   background: var(--accent-glow);
-  border: 1px solid var(--accent);
+  border: 1px solid rgba(108, 99, 255, 0.3);
   border-radius: 50%;
   width: 52px;
   height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.compare-globe-wrap {
+  padding: 0 32px 28px;
 }
 
 .compare-table {
-  padding: 0 32px 24px;
+  padding: 8px 32px 28px;
 }
 
 .compare-row {
@@ -62,44 +81,55 @@
   grid-template-columns: 1fr 140px 1fr;
   align-items: center;
   gap: 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: var(--transition);
 }
 .compare-row:last-child { border-bottom: none; }
+.compare-row:hover { background: rgba(255,255,255,0.01); border-radius: var(--radius-sm); }
 
 .compare-label {
   text-align: center;
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: var(--bg-elevated);
+  border-radius: 20px;
 }
 
 .compare-cell {
   font-size: 13px;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .cell-a { text-align: right; }
 .cell-b { text-align: left; }
 
+.compare-cell-highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 @media (max-width: 600px) {
   .compare-header {
     grid-template-columns: 1fr;
     justify-items: center;
-    padding: 24px 16px;
+    padding: 24px 20px;
   }
+  .compare-vs-badge { display: none; }
   .compare-row {
     grid-template-columns: 1fr;
     gap: 4px;
     padding: 16px 0;
   }
   .compare-label {
-    order: -1;
     text-align: left;
     margin-bottom: 4px;
   }
   .cell-a, .cell-b { text-align: left; }
-  .compare-table { padding: 0 16px 16px; }
+  .compare-table { padding: 8px 20px 24px; }
 }

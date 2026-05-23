@@ -5,7 +5,7 @@ const BASE = import.meta.env.VITE_COUNTRIES_API || 'https://restcountries.com/v3
 // /all endpoint has a 10-field limit — use only what cards need
 const LIST_FIELDS = 'name,cca3,flags,population,region,subregion,capital,languages,currencies,area';
 // Single-country endpoints have no such limit
-const DETAIL_FIELDS = 'name,cca3,flags,population,region,subregion,capital,languages,currencies,area,borders,timezones,continents,tld';
+const DETAIL_FIELDS = 'name,cca3,flags,population,region,subregion,capital,languages,currencies,area,borders,timezones,continents,tld,latlng';
 
 // GET /v3.1/all - Fetch all countries (core fields for listing)
 export const getAllCountries = async () => {

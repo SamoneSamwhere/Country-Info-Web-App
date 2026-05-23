@@ -33,7 +33,7 @@ export default function FavoritesPage() {
     }
   };
 
-  if (loading) return <div className="spinner" />;
+  if (loading) return <div className="spinner-wrap"><div className="spinner" /></div>;
 
   return (
     <div className="favorites-page container">
@@ -47,7 +47,7 @@ export default function FavoritesPage() {
 
       {favorites.length === 0 ? (
         <div className="fav-empty">
-          <span>★</span>
+          <span className="fav-empty-icon">★</span>
           <h3>No favorites yet</h3>
           <p>Browse countries and click the star icon to save them here.</p>
           <Link to="/explore" className="btn btn-primary">Explore Countries</Link>
@@ -55,7 +55,7 @@ export default function FavoritesPage() {
       ) : (
         <div className="fav-list">
           {favorites.map(fav => (
-            <div key={fav.id} className="fav-item card">
+            <div key={fav.id} className="fav-item">
               <Link to={`/country/${fav.countryCode}`} className="fav-flag-wrap">
                 <img src={fav.flagUrl} alt={fav.countryName} />
               </Link>

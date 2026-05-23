@@ -1,6 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { formatPopulation, formatArea, getCurrencies, getLanguages, getCapital } from '../utils/formatters';
+import CountryGlobe from './CountryGlobe';
 import './CountryDetail.css';
 
 export default function CountryDetail({ country }) {
@@ -40,8 +41,8 @@ export default function CountryDetail({ country }) {
             <p className="detail-official">{country.name.official}</p>
           )}
           <div className="detail-badges">
-            <span className="badge">{country.region}</span>
-            {country.subregion && <span className="badge">{country.subregion}</span>}
+            {country.region && <span className="badge badge-region">{country.region}</span>}
+            {country.subregion && <span className="badge badge-subregion">{country.subregion}</span>}
           </div>
           {user && (
             <button
@@ -54,9 +55,15 @@ export default function CountryDetail({ country }) {
         </div>
       </div>
 
+      {country.latlng && (
+        <div className="detail-globe-wrap">
+          <CountryGlobe countries={[country]} height={360} />
+        </div>
+      )}
+
       <div className="detail-grid">
         <div className="detail-card">
-          <h3>🏛️ General</h3>
+          <div className="detail-card-title"><span>🏛️</span> General Info</div>
           <div className="detail-rows">
             <div className="detail-row"><span>Capital</span><strong>{getCapital(country.capital)}</strong></div>
             <div className="detail-row"><span>Population</span><strong>{formatPopulation(country.population)}</strong></div>
@@ -67,20 +74,20 @@ export default function CountryDetail({ country }) {
         </div>
 
         <div className="detail-card">
-          <h3>💬 Culture</h3>
+          <div className="detail-card-title"><span>💬</span> Culture</div>
           <div className="detail-rows">
             <div className="detail-row"><span>Languages</span><strong>{getLanguages(country.languages)}</strong></div>
             <div className="detail-row"><span>Currencies</span><strong>{getCurrencies(country.currencies)}</strong></div>
-            <div className="detail-row"><span>Timezones</span><strong>{country.timezones?.slice(0, 3).join(', ')}{country.timezones?.length > 3 ? '...' : ''}</strong></div>
+            <div className="detail-row"><span>Timezones</span><strong>{country.timezones?.slice(0, 3).join(', ')}{country.timezones?.length > 3 ? '…' : ''}</strong></div>
           </div>
         </div>
 
         {country.borders && country.borders.length > 0 && (
           <div className="detail-card detail-card-wide">
-            <h3>🗺️ Bordering Countries</h3>
+            <div className="detail-card-title"><span>🗺️</span> Bordering Countries</div>
             <div className="border-tags">
               {country.borders.map(b => (
-                <span key={b} className="badge border-tag">{b}</span>
+                <span key={b} className="border-tag">{b}</span>
               ))}
             </div>
           </div>

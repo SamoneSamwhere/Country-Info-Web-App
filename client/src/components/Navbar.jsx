@@ -15,17 +15,24 @@ export default function Navbar() {
     setMenuOpen(false);
   };
 
-  const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
+  const isActive = (path) =>
+    location.pathname === path || location.pathname.startsWith(path + '/');
+
+  const initials = user?.username?.slice(0, 2).toUpperCase() || '??';
 
   return (
     <nav className="navbar">
       <div className="navbar-inner container">
         <Link to="/" className="navbar-logo">
           <span className="logo-globe">🌍</span>
-          <span className="logo-text">GlobeScope</span>
+          <span className="logo-text">Globe<span>Scope</span></span>
         </Link>
 
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+        <button
+          className="hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
           <span /><span /><span />
         </button>
 
@@ -51,7 +58,10 @@ export default function Navbar() {
           <div className="nav-auth">
             {user ? (
               <>
-                <span className="nav-user">👤 {user.username}</span>
+                <span className="nav-user">
+                  <span className="nav-avatar">{initials}</span>
+                  {user.username}
+                </span>
                 <button className="btn btn-ghost btn-sm" onClick={handleLogout}>Logout</button>
               </>
             ) : (
