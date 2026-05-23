@@ -4,66 +4,101 @@
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition-slow);
+  position: relative;
 }
 
 .country-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow-accent);
+  transform: translateY(-6px);
+  border-color: rgba(108, 99, 255, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(108, 99, 255, 0.1);
 }
 
+/* Flag */
 .card-flag {
-  height: 160px;
+  height: 155px;
   overflow: hidden;
   background: var(--bg-elevated);
+  position: relative;
 }
 
 .card-flag img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .country-card:hover .card-flag img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
+.card-flag-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14, 14, 26, 0.5) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Fav button on flag */
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(7, 7, 16, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  font-size: 14px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 2;
+  padding: 0;
+  opacity: 0;
+}
+
+.country-card:hover .fav-btn,
+.fav-btn.active {
+  opacity: 1;
+}
+
+.fav-btn:hover,
+.fav-btn.active {
+  color: var(--warning);
+  border-color: var(--warning);
+  background: rgba(255, 179, 71, 0.1);
+  transform: scale(1.1);
+}
+
+/* Body */
 .card-body {
-  padding: 16px;
+  padding: 18px;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.card-header-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
-}
-
 .card-name {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
+  transition: var(--transition);
 }
 
-.fav-btn {
-  background: none;
-  font-size: 18px;
-  color: var(--text-muted);
-  padding: 0;
-  flex-shrink: 0;
-  transition: var(--transition);
-  line-height: 1;
-}
-.fav-btn:hover, .fav-btn.active {
-  color: var(--warning);
-  transform: scale(1.2);
+.country-card:hover .card-name {
+  color: #fff;
 }
 
 .card-meta {
@@ -72,9 +107,15 @@
   flex-wrap: wrap;
 }
 
+.card-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+}
+
 .card-stats {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   margin-top: auto;
 }
 
@@ -82,17 +123,22 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
 }
 
 .stat-label {
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .stat-value {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

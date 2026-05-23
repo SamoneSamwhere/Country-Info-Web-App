@@ -28,8 +28,8 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-card card">
-        <div className="auth-logo">🌍 GlobeScope</div>
+      <div className="auth-card">
+        <div className="auth-logo">🌍 <span className="auth-logo-text">GlobeScope</span></div>
         <h2 className="auth-title">Welcome Back</h2>
         <p className="auth-sub">Sign in to access your favorites</p>
 

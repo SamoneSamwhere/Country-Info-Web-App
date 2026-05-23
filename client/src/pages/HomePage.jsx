@@ -9,14 +9,50 @@ const stats = [
   { label: 'Currencies', value: '180+' },
 ];
 
+const features = [
+  {
+    icon: '🔍',
+    title: 'Search & Explore',
+    desc: 'Search any country by name or filter by region. Instantly browse all 195+ countries with key stats at a glance.',
+    link: '/explore',
+    label: 'Start Exploring',
+  },
+  {
+    icon: '⚖️',
+    title: 'Compare Countries',
+    desc: 'Pick any two countries and compare them side by side — population, area, currency, languages, and more.',
+    link: '/compare',
+    label: 'Compare Now',
+  },
+  {
+    icon: '★',
+    title: 'Save Favorites',
+    desc: 'Create an account to bookmark your favorite countries and attach personal notes to each one.',
+    link: '/register',
+    label: 'Get Started',
+    authLink: '/favorites',
+    authLabel: 'My Favorites',
+  },
+];
+
 export default function HomePage() {
   const { user } = useAuth();
+
   return (
     <div className="home-page">
+
+      {/* Hero */}
       <section className="hero">
-        <div className="hero-bg" />
+        <div className="hero-bg">
+          <div className="hero-orb hero-orb-1" />
+          <div className="hero-orb hero-orb-2" />
+          <div className="hero-orb hero-orb-3" />
+        </div>
         <div className="container hero-content">
-          <div className="hero-eyebrow">🌍 Country Info App</div>
+          <div className="hero-eyebrow">
+            <span className="hero-eyebrow-dot" />
+            Powered by REST Countries API
+          </div>
           <h1 className="hero-title">
             Explore Every<br />
             <span className="hero-accent">Corner of Earth</span>
@@ -26,14 +62,20 @@ export default function HomePage() {
             currencies, languages, flags, and more. Compare nations side by side and save your favorites.
           </p>
           <div className="hero-actions">
-            <Link to="/explore" className="btn btn-primary hero-btn">Explore Countries →</Link>
+            <Link to="/explore" className="btn btn-primary hero-btn">
+              <span className="hero-btn-icon">🌍</span>
+              Explore Countries
+            </Link>
             {!user && (
-              <Link to="/register" className="btn btn-ghost hero-btn">Sign Up Free</Link>
+              <Link to="/register" className="btn btn-ghost hero-btn">
+                Sign Up Free
+              </Link>
             )}
           </div>
         </div>
       </section>
 
+      {/* Stats */}
       <section className="stats-bar container">
         {stats.map(s => (
           <div key={s.label} className="stat-item">
@@ -43,31 +85,44 @@ export default function HomePage() {
         ))}
       </section>
 
+      {/* Features */}
       <section className="features container">
-        <h2 className="section-title">What You Can Do</h2>
+        <p className="section-eyebrow">What You Can Do</p>
+        <h2 className="section-title">Everything in One Place</h2>
+        <p className="section-sub">All the tools you need to explore, compare, and track the world's nations.</p>
         <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">🔍</div>
-            <h3>Search & Explore</h3>
-            <p>Search any country by name or filter by region. Instantly browse all 195+ countries with key stats.</p>
-            <Link to="/explore" className="feature-link">Start Exploring →</Link>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">⚖️</div>
-            <h3>Compare Countries</h3>
-            <p>Pick any two countries and compare them side by side — population, area, currency, languages, and more.</p>
-            <Link to="/compare" className="feature-link">Compare Now →</Link>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">★</div>
-            <h3>Save Favorites</h3>
-            <p>Create an account to bookmark your favorite countries and add personal notes to each one.</p>
-            <Link to={user ? '/favorites' : '/register'} className="feature-link">
-              {user ? 'My Favorites →' : 'Sign Up to Save →'}
-            </Link>
-          </div>
+          {features.map(f => (
+            <div key={f.title} className="feature-card">
+              <div className="feature-icon-wrap">{f.icon}</div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+              <Link
+                to={user && f.authLink ? f.authLink : f.link}
+                className="feature-link"
+              >
+                {user && f.authLabel ? f.authLabel : f.label} →
+              </Link>
+            </div>
+          ))}
         </div>
       </section>
+
+      {/* CTA */}
+      {!user && (
+        <section className="cta-section container">
+          <div className="cta-banner">
+            <div className="cta-content">
+              <h2>Ready to start exploring?</h2>
+              <p>Create a free account to save favorites and add personal notes to countries.</p>
+            </div>
+            <div className="cta-actions">
+              <Link to="/register" className="btn btn-primary">Create Account</Link>
+              <Link to="/explore" className="btn btn-ghost">Browse First</Link>
+            </div>
+          </div>
+        </section>
+      )}
+
     </div>
   );
 }

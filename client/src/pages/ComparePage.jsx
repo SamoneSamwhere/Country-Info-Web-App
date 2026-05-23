@@ -53,13 +53,16 @@ export default function ComparePage() {
         </div>
 
         <div className="compare-btn-wrap">
-          <button
-            className="btn btn-primary"
-            onClick={handleCompare}
-            disabled={!canCompare || loading}
-          >
-            {loading ? 'Loading...' : 'Compare ⚖️'}
-          </button>
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
+            <div className="compare-vs">VS</div>
+            <button
+              className="btn btn-primary"
+              onClick={handleCompare}
+              disabled={!canCompare || loading}
+            >
+              {loading ? 'Loading…' : 'Compare'}
+            </button>
+          </div>
         </div>
 
         <div className="selector-group">
@@ -81,8 +84,9 @@ export default function ComparePage() {
 
       {!countryA && !countryB && (
         <div className="compare-empty">
-          <span>⚖️</span>
-          <p>Select two countries above and click Compare to see a detailed breakdown.</p>
+          <span className="empty-icon">⚖️</span>
+          <h3>Ready to Compare</h3>
+          <p>Select two countries above and click Compare to see a detailed side-by-side breakdown.</p>
         </div>
       )}
     </div>

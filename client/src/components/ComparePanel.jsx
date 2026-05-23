@@ -1,4 +1,5 @@
 import { formatPopulation, formatArea, getCurrencies, getLanguages, getCapital } from '../utils/formatters';
+import CountryGlobe from './CountryGlobe';
 import './ComparePanel.css';
 
 const rows = [
@@ -26,13 +27,19 @@ export default function ComparePanel({ countryA, countryB }) {
           <h2>{countryA.name?.common}</h2>
           <span className="badge">{countryA.region}</span>
         </div>
-        <div className="compare-vs">VS</div>
+        <div className="compare-vs-badge">VS</div>
         <div className="compare-flag-col">
           <img src={countryB.flags?.svg || countryB.flags?.png} alt={countryB.name?.common} />
           <h2>{countryB.name?.common}</h2>
           <span className="badge">{countryB.region}</span>
         </div>
       </div>
+
+      {(countryA.latlng || countryB.latlng) && (
+        <div className="compare-globe-wrap">
+          <CountryGlobe countries={[countryA, countryB]} height={400} />
+        </div>
+      )}
 
       <div className="compare-table">
         {rows.map(({ label, fn }) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getAllCountries, searchByName, getByRegion } from '../services/countriesService';
+import { getAllCountries } from '../services/countriesService';
 import CountryCard from '../components/CountryCard';
 import SearchBar from '../components/SearchBar';
 import FilterDropdown from '../components/FilterDropdown';
@@ -19,7 +19,7 @@ export default function ExplorePage() {
         const data = await getAllCountries();
         setAllCountries(data);
       } catch {
-        setError('Failed to load countries. Please try again.');
+        setError('Failed to load countries. Please check your connection and try again.');
       } finally {
         setLoading(false);
       }
@@ -29,9 +29,7 @@ export default function ExplorePage() {
 
   const filtered = useMemo(() => {
     let list = allCountries;
-    if (region) {
-      list = list.filter(c => c.region === region);
-    }
+    if (region) list = list.filter(c => c.region === region);
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(c =>
@@ -49,23 +47,34 @@ export default function ExplorePage() {
         <div>
           <h1 className="explore-title">Explore Countries</h1>
           <p className="explore-sub">
-            {loading ? 'Loading...' : `${filtered.length} countries found`}
+            {loading
+              ? 'Loading countries…'
+              : <><strong>{filtered.length}</strong> {filtered.length === 1 ? 'country' : 'countries'} found</>
+            }
           </p>
         </div>
         <div className="explore-controls">
-          <SearchBar value={search} onChange={setSearch} placeholder="Search by name or capital..." />
+          <SearchBar value={search} onChange={setSearch} placeholder="Search by name or capital…" />
           <FilterDropdown value={region} onChange={setRegion} />
         </div>
       </div>
 
-      {error && <div className="error-box">{error}</div>}
+      {error && (
+        <div className="error-box">
+          ⚠️ {error}
+        </div>
+      )}
 
       {loading ? (
-        <div className="spinner" />
+        <div className="spinner-wrap">
+          <div className="spinner" />
+          <span className="spinner-text">Loading countries…</span>
+        </div>
       ) : filtered.length === 0 ? (
         <div className="empty-state">
-          <span>🌐</span>
-          <p>No countries found matching your search.</p>
+          <span className="empty-icon">🌐</span>
+          <h3>No countries found</h3>
+          <p>Try a different name or clear your filters.</p>
           <button className="btn btn-ghost" onClick={() => { setSearch(''); setRegion(''); }}>
             Clear Filters
           </button>

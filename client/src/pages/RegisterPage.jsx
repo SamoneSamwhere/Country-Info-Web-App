@@ -34,8 +34,8 @@ export default function RegisterPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-card card">
-        <div className="auth-logo">🌍 GlobeScope</div>
+      <div className="auth-card">
+        <div className="auth-logo">🌍 <span className="auth-logo-text">GlobeScope</span></div>
         <h2 className="auth-title">Create Account</h2>
         <p className="auth-sub">Join to save your favorite countries</p>
 

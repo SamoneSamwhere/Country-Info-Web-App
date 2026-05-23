@@ -25,30 +25,30 @@ export default function CountryCard({ country }) {
   };
 
   return (
-    <Link to={`/country/${code}`} className="country-card card fade-up">
+    <Link to={`/country/${code}`} className="country-card fade-up">
       <div className="card-flag">
         <img
           src={country.flags?.png || country.flags?.svg}
           alt={`Flag of ${country.name?.common}`}
           loading="lazy"
         />
+        <div className="card-flag-overlay" />
+        {user && (
+          <button
+            className={`fav-btn ${fav ? 'active' : ''}`}
+            onClick={handleFavToggle}
+            title={fav ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            {fav ? '★' : '☆'}
+          </button>
+        )}
       </div>
       <div className="card-body">
-        <div className="card-header-row">
-          <h3 className="card-name">{country.name?.common}</h3>
-          {user && (
-            <button
-              className={`fav-btn ${fav ? 'active' : ''}`}
-              onClick={handleFavToggle}
-              title={fav ? 'Remove from favorites' : 'Add to favorites'}
-            >
-              {fav ? '★' : '☆'}
-            </button>
-          )}
-        </div>
+        <h3 className="card-name">{country.name?.common}</h3>
         <div className="card-meta">
           <span className="badge">{country.region}</span>
         </div>
+        <div className="card-divider" />
         <div className="card-stats">
           <div className="stat">
             <span className="stat-label">Population</span>
