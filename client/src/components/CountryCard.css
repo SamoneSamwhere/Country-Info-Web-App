@@ -1,144 +1,101 @@
-.country-card {
+.cc {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+  border-radius: var(--r-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: var(--transition-slow);
-  position: relative;
+  transition: all var(--t-slow) var(--ease);
+  animation: fadeUp var(--t-slow) var(--ease) both;
 }
-
-.country-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(108, 99, 255, 0.35);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(108, 99, 255, 0.1);
+.cc:hover {
+  border-color: rgba(99,102,241,0.30);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(99,102,241,0.10);
+  transform: translateY(-5px);
 }
 
 /* Flag */
-.card-flag {
-  height: 155px;
-  overflow: hidden;
-  background: var(--bg-elevated);
+.cc-flag {
   position: relative;
+  height: 152px;
+  overflow: hidden;
+  background: var(--bg-2);
 }
-
-.card-flag img {
-  width: 100%;
-  height: 100%;
+.cc-flag img {
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.6s var(--ease);
+}
+.cc:hover .cc-flag img { transform: scale(1.07); }
+
+.cc-flag-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,5,15,0.60) 0%, transparent 55%);
 }
 
-.country-card:hover .card-flag img {
-  transform: scale(1.08);
-}
-
-.card-flag-overlay {
+.cc-region-pill {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(14, 14, 26, 0.5) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-/* Fav button on flag */
-.fav-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  background: rgba(7, 7, 16, 0.7);
+  top: 10px; left: 10px;
+  padding: 3px 9px;
+  border-radius: var(--r-full);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(5,5,15,0.65);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--txt-2);
+}
+
+.cc-fav {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 30px; height: 30px;
   border-radius: 50%;
+  background: rgba(5,5,15,0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--txt-3);
   font-size: 14px;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-  z-index: 2;
-  padding: 0;
+  display: flex; align-items: center; justify-content: center;
   opacity: 0;
+  transition: all var(--t-base) var(--ease);
+  padding: 0;
 }
-
-.country-card:hover .fav-btn,
-.fav-btn.active {
-  opacity: 1;
-}
-
-.fav-btn:hover,
-.fav-btn.active {
-  color: var(--warning);
-  border-color: var(--warning);
-  background: rgba(255, 179, 71, 0.1);
-  transform: scale(1.1);
-}
+.cc:hover .cc-fav, .cc-fav.active { opacity: 1; }
+.cc-fav.active { color: var(--amber); border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12); }
+.cc-fav:hover  { color: var(--amber); transform: scale(1.15); }
 
 /* Body */
-.card-body {
-  padding: 18px;
+.cc-body {
+  padding: 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.card-name {
-  font-family: var(--font-display);
+.cc-name {
   font-size: 15px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--txt-1);
   line-height: 1.3;
-  transition: var(--transition);
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  transition: color var(--t-base) var(--ease);
 }
+.cc:hover .cc-name { color: #fff; }
 
-.country-card:hover .card-name {
-  color: #fff;
-}
-
-.card-meta {
+.cc-stats {
   display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.card-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 2px 0;
-}
-
-.card-stats {
-  display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 10px;
   margin-top: auto;
 }
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.stat-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.7px;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.stat-value {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.cc-stat { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cc-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--txt-3); font-weight: 600; }
+.cc-stat-val   { font-size: 13px; font-weight: 500; color: var(--txt-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cc-stat-sep   { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }

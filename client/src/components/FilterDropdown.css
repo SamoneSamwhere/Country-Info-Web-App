@@ -1,49 +1,22 @@
-.filter-dropdown {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
+.filter-dropdown { position: relative; display: inline-flex; align-items: center; }
 
 .filter-select {
   appearance: none;
-  background: var(--bg-card);
+  background: var(--surface-1);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text-primary);
-  padding: 13px 40px 13px 16px;
+  border-radius: var(--r-md);
+  color: var(--txt-1);
+  padding: 11px 36px 11px 14px;
   font-size: 14px;
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
+  font-weight: 500;
   cursor: pointer;
   outline: none;
-  transition: var(--transition);
-  min-width: 160px;
+  min-width: 150px;
+  transition: all var(--t-base) var(--ease);
 }
+.filter-select:hover  { border-color: var(--border-2); background: var(--surface-2); }
+.filter-select:focus  { border-color: rgba(99,102,241,0.45); box-shadow: 0 0 0 3px var(--glow-brand); }
+.filter-select option { background: var(--bg-1); color: var(--txt-1); }
 
-.filter-select:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-elevated);
-}
-
-.filter-select:focus {
-  border-color: rgba(108, 99, 255, 0.5);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-  background: var(--bg-elevated);
-}
-
-.filter-select option {
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-}
-
-.filter-arrow {
-  position: absolute;
-  right: 14px;
-  pointer-events: none;
-  color: var(--text-muted);
-  font-size: 11px;
-  transition: var(--transition);
-}
-
-.filter-dropdown:focus-within .filter-arrow {
-  color: var(--accent);
-}
+.filter-arrow { position: absolute; right: 12px; pointer-events: none; color: var(--txt-3); font-size: 12px; }
