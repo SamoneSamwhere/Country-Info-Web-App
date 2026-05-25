@@ -270,10 +270,12 @@ The globe uses the country's `latlng` coordinates from the REST Countries API. I
 
 | Name | Role |
 |---|---|
-| [Member 1] | Frontend – Explore & Compare pages |
-| [Member 2] | Frontend – Auth, Favorites, Components |
-| [Member 3] | Backend – Express API, Auth, CRUD |
-| [Member 4] | Documentation, Testing, README |
+| **Fiona Estella** | Project Manager |
+| **Prince Christian Parnada** | Developer / Technical Lead |
+| **Samantha Cortes** | Developer / Technical (Co-Dev) |
+| **Sean Xymoun Boniel** | UI/UX & Frontend |
+| **Alexa Shane Adolfo** | QA & Testing |
+| **Mild Disuyo** | Documentation & Presentation |
 
 ---
 

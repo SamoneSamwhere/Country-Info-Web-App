@@ -1,0 +1,149 @@
+.about-page { padding: 48px 0 100px; }
+
+/* Hero */
+.about-hero {
+  position: relative;
+  text-align: center;
+  padding: 60px 24px 72px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.about-hero-glow {
+  position: absolute;
+  top: -150px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 65%);
+  pointer-events: none;
+}
+.about-course-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: var(--r-full);
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.20);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--indigo-light);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.about-title {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.about-desc {
+  font-size: 16px;
+  color: var(--txt-2);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* Section */
+.about-section { margin-bottom: 72px; }
+.about-section-head {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 8px; margin-bottom: 32px;
+}
+.about-section-title {
+  font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+}
+
+/* Team grid */
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.about-member {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border-radius: var(--r-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  transition: all var(--t-slow) var(--ease);
+}
+.about-member:hover { border-color: var(--border-2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* Color accents */
+.about-member-indigo { border-left: 3px solid var(--indigo); }
+.about-member-emerald{ border-left: 3px solid var(--emerald); }
+.about-member-amber  { border-left: 3px solid var(--amber); }
+.about-member-rose   { border-left: 3px solid var(--rose); }
+.about-member-purple { border-left: 3px solid #a78bfa; }
+
+.about-member-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.about-member-info { display: flex; flex-direction: column; gap: 5px; }
+.about-member-name {
+  font-size: 16px; font-weight: 700; color: var(--txt-1);
+  font-family: var(--font-display);
+}
+.about-member-role {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 2px 9px; border-radius: var(--r-full);
+}
+.about-role-indigo  { background: rgba(99,102,241,0.12); color: var(--indigo-light); }
+.about-role-emerald { background: rgba(16,185,129,0.10); color: var(--emerald-light); }
+.about-role-amber   { background: rgba(245,158,11,0.10); color: var(--amber); }
+.about-role-rose    { background: rgba(244,63,94,0.10);  color: var(--rose); }
+.about-role-purple  { background: rgba(167,139,250,0.12); color: #a78bfa; }
+
+.about-member-desc {
+  font-size: 13px; color: var(--txt-3); line-height: 1.6; margin-top: 2px;
+}
+
+/* Tech grid */
+.about-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.about-tech-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  transition: all var(--t-base) var(--ease);
+}
+.about-tech-card:hover { background: var(--surface-2); border-color: var(--border-2); }
+.about-tech-icon { font-size: 22px; flex-shrink: 0; }
+.about-tech-name { font-size: 13px; font-weight: 600; color: var(--txt-1); }
+.about-tech-desc { font-size: 11px; color: var(--txt-3); margin-top: 2px; }
+
+/* Footer note */
+.about-footer-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-radius: var(--r-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--txt-3);
+}
+.about-footer-note span { font-size: 20px; }
+
+@media (max-width: 900px) { .about-tech-grid  { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .about-team-grid  { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .about-tech-grid  { grid-template-columns: 1fr; } }

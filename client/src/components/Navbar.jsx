@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: '/explore',  label: 'Explore' },
   { to: '/compare',  label: 'Compare' },
   { to: '/favorites',label: 'Favorites', authOnly: true },
+  { to: '/about',    label: 'About' },
 ];
 
 export default function Navbar() {
