@@ -32,28 +32,6 @@ const NUMERIC_ROWS = [
   { label: 'Area',       key: 'area',       fmt: v => formatArea(v), icon: '📐' },
 ];
 
-/* ── mini OSM map iframe ─────────────────────────────── */
-function MiniMap({ latlng, name, zoom = 4 }) {
-  if (!latlng || latlng.length < 2) return (
-    <div className="cp-minimap cp-minimap-empty">
-      <span>🗺</span><p>No map data</p>
-    </div>
-  );
-  const [lat, lng] = latlng;
-  const delta = 18; // degrees of bbox
-  const bbox = `${lng - delta},${lat - delta},${lng + delta},${lat + delta}`;
-  const src  = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lng}`;
-  return (
-    <div className="cp-minimap">
-      <iframe
-        title={`Map of ${name}`}
-        src={src}
-        loading="lazy"
-        scrolling="no"
-      />
-    </div>
-  );
-}
 
 /* ── bar comparison row ──────────────────────────────── */
 function BarRow({ label, icon, valA, valB, fmtA, fmtB }) {
@@ -107,7 +85,6 @@ export default function ComparePanel({ countryA, countryB }) {
             <h2 className="cp-country-name">{countryA.name?.common}</h2>
             <span className="badge badge-indigo">{countryA.region}</span>
           </div>
-          <MiniMap latlng={countryA.latlng} name={countryA.name?.common} />
         </div>
 
         {/* VS divider */}
@@ -124,7 +101,6 @@ export default function ComparePanel({ countryA, countryB }) {
             <h2 className="cp-country-name">{countryB.name?.common}</h2>
             <span className="badge badge-emerald">{countryB.region}</span>
           </div>
-          <MiniMap latlng={countryB.latlng} name={countryB.name?.common} />
         </div>
 
       </div>
