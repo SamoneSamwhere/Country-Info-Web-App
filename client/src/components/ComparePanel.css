@@ -19,9 +19,11 @@
 }
 
 .cp-country {
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
 }
 .cp-country:last-child { align-items: flex-end; text-align: right; }
+.cp-country .badge { align-self: flex-start; }
+.cp-country:last-child .badge { align-self: flex-end; }
 
 .cp-country img {
   width: 130px; height: 82px;
