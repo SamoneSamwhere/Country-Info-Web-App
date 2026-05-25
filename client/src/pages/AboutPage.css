@@ -55,58 +55,77 @@
 /* Team grid */
 .about-team-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
 .about-member {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 24px;
-  border-radius: var(--r-lg);
-  background: var(--surface-1);
+  display: flex; flex-direction: column;
+  border-radius: var(--r-xl);
+  background: var(--bg-1);
   border: 1px solid var(--border);
-  transition: all var(--t-slow) var(--ease);
+  overflow: hidden;
+  transition: transform var(--t-slow) var(--ease), border-color var(--t-slow) var(--ease), box-shadow var(--t-slow) var(--ease);
 }
-.about-member:hover { border-color: var(--border-2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.about-member:hover { transform: translateY(-4px); border-color: var(--border-2); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
 
-/* Color accents */
-.about-member-indigo { border-left: 3px solid var(--indigo); }
-.about-member-emerald{ border-left: 3px solid var(--emerald); }
-.about-member-amber  { border-left: 3px solid var(--amber); }
-.about-member-rose   { border-left: 3px solid var(--rose); }
-.about-member-purple { border-left: 3px solid #a78bfa; }
+/* Colored top strip with avatar */
+.about-member-top {
+  position: relative;
+  height: 90px;
+  display: flex; align-items: flex-end;
+  padding: 0 20px 0;
+}
+.about-top-indigo  { background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(99,102,241,0.06)); border-bottom: 1px solid rgba(99,102,241,0.2); }
+.about-top-emerald { background: linear-gradient(135deg, rgba(16,185,129,0.18), rgba(16,185,129,0.06)); border-bottom: 1px solid rgba(16,185,129,0.2); }
+.about-top-amber   { background: linear-gradient(135deg, rgba(245,158,11,0.18), rgba(245,158,11,0.06));  border-bottom: 1px solid rgba(245,158,11,0.2); }
+.about-top-rose    { background: linear-gradient(135deg, rgba(244,63,94,0.18),  rgba(244,63,94,0.06));   border-bottom: 1px solid rgba(244,63,94,0.2); }
+.about-top-purple  { background: linear-gradient(135deg, rgba(167,139,250,0.18),rgba(167,139,250,0.06)); border-bottom: 1px solid rgba(167,139,250,0.2); }
 
-.about-member-icon {
-  width: 44px; height: 44px;
-  border-radius: var(--r-md);
-  background: var(--surface-2);
-  border: 1px solid var(--border-2);
+/* Avatar */
+.about-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
+  font-size: 18px; font-weight: 700; color: #fff;
+  border: 3px solid var(--bg-1);
+  position: absolute; bottom: -28px; left: 20px;
   flex-shrink: 0;
 }
+.about-avatar-indigo  { background: #6366f1; }
+.about-avatar-emerald { background: #10b981; }
+.about-avatar-amber   { background: #f59e0b; }
+.about-avatar-rose    { background: #f43f5e; }
+.about-avatar-purple  { background: #a78bfa; }
 
-.about-member-info { display: flex; flex-direction: column; gap: 5px; }
+.about-member-icon-sm {
+  position: absolute; top: 14px; right: 16px;
+  font-size: 22px; opacity: 0.7;
+}
+
+/* Card body */
+.about-member-body {
+  padding: 40px 20px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
 .about-member-name {
-  font-size: 16px; font-weight: 700; color: var(--txt-1);
-  font-family: var(--font-display);
+  font-size: 15px; font-weight: 700; color: var(--txt-1);
+  letter-spacing: -0.01em;
 }
 .about-member-role {
-  display: inline-block;
-  font-size: 11px; font-weight: 700;
+  display: inline-flex; align-self: flex-start;
+  font-size: 10px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.07em;
-  padding: 2px 9px; border-radius: var(--r-full);
+  padding: 3px 10px; border-radius: var(--r-full);
 }
-.about-role-indigo  { background: rgba(99,102,241,0.12); color: var(--indigo-light); }
-.about-role-emerald { background: rgba(16,185,129,0.10); color: var(--emerald-light); }
-.about-role-amber   { background: rgba(245,158,11,0.10); color: var(--amber); }
-.about-role-rose    { background: rgba(244,63,94,0.10);  color: var(--rose); }
-.about-role-purple  { background: rgba(167,139,250,0.12); color: #a78bfa; }
+.about-role-indigo  { background: rgba(99,102,241,0.12); color: #818cf8; }
+.about-role-emerald { background: rgba(16,185,129,0.12);  color: #34d399; }
+.about-role-amber   { background: rgba(245,158,11,0.12);  color: #fbbf24; }
+.about-role-rose    { background: rgba(244,63,94,0.12);   color: #fb7185; }
+.about-role-purple  { background: rgba(167,139,250,0.12); color: #c4b5fd; }
 
 .about-member-desc {
-  font-size: 13px; color: var(--txt-3); line-height: 1.6; margin-top: 2px;
+  font-size: 13px; color: var(--txt-3); line-height: 1.65; margin-top: 2px;
 }
 
 /* Tech grid */
@@ -144,6 +163,7 @@
 }
 .about-footer-note span { font-size: 20px; }
 
+@media (max-width: 960px) { .about-team-grid  { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) { .about-tech-grid  { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 700px) { .about-team-grid  { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .about-team-grid  { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .about-tech-grid  { grid-template-columns: 1fr; } }

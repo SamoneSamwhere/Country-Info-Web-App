@@ -79,16 +79,22 @@ export default function AboutPage() {
           <h2 className="about-section-title">Meet the people behind it</h2>
         </div>
         <div className="about-team-grid">
-          {TEAM.map((m, i) => (
-            <div key={m.name} className={`about-member about-member-${m.color} fade-up`} style={{ animationDelay: `${i * 0.07}s` }}>
-              <div className="about-member-icon">{m.icon}</div>
-              <div className="about-member-info">
-                <h3 className="about-member-name">{m.name}</h3>
-                <span className={`about-member-role about-role-${m.color}`}>{m.role}</span>
-                <p className="about-member-desc">{m.desc}</p>
+          {TEAM.map((m, i) => {
+            const initials = m.name.split(' ').map(w => w[0]).slice(0, 2).join('');
+            return (
+              <div key={m.name} className={`about-member about-member-${m.color} fade-up`} style={{ animationDelay: `${i * 0.07}s` }}>
+                <div className={`about-member-top about-top-${m.color}`}>
+                  <div className={`about-avatar about-avatar-${m.color}`}>{initials}</div>
+                  <span className="about-member-icon-sm">{m.icon}</span>
+                </div>
+                <div className="about-member-body">
+                  <h3 className="about-member-name">{m.name}</h3>
+                  <span className={`about-member-role about-role-${m.color}`}>{m.role}</span>
+                  <p className="about-member-desc">{m.desc}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
