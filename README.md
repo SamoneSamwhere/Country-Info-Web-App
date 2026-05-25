@@ -270,7 +270,7 @@ The globe uses the country's `latlng` coordinates from the REST Countries API. I
 
 | Name | Role |
 |---|---|
-| **Fiona Estella** | Project Manager |
+| **Fiona Estela** | Project Manager |
 | **Prince Christian Parnada** | Developer / Technical Lead |
 | **Samantha Cortes** | Developer / Technical (Co-Dev) |
 | **Sean Xymoun Boniel** | UI/UX & Frontend |
