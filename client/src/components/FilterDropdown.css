@@ -2,21 +2,18 @@
 
 .filter-select {
   appearance: none;
-  background: var(--surface-1);
+  background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   color: var(--txt-1);
-  padding: 11px 36px 11px 14px;
-  font-size: 14px;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
-  min-width: 150px;
-  transition: all var(--t-base) var(--ease);
+  padding: 10px 34px 10px 13px;
+  font-size: 14px; font-family: var(--sans); font-weight: 500;
+  cursor: pointer; outline: none;
+  min-width: 145px;
+  transition: border-color var(--t) var(--ease);
 }
-.filter-select:hover  { border-color: var(--border-2); background: var(--surface-2); }
-.filter-select:focus  { border-color: rgba(99,102,241,0.45); box-shadow: 0 0 0 3px var(--glow-brand); }
-.filter-select option { background: var(--bg-1); color: var(--txt-1); }
+.filter-select:hover { border-color: var(--border-2); }
+.filter-select:focus { border-color: rgba(99,102,241,0.4); box-shadow: 0 0 0 3px rgba(99,102,241,0.08); }
+.filter-select option { background: var(--bg-1); }
 
-.filter-arrow { position: absolute; right: 12px; pointer-events: none; color: var(--txt-3); font-size: 12px; }
+.filter-arrow { position: absolute; right: 11px; pointer-events: none; color: var(--txt-3); font-size: 11px; }

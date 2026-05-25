@@ -3,136 +3,117 @@ import { useAuth } from '../context/AuthContext';
 import './HomePage.css';
 
 const STATS = [
-  { value: '195+', label: 'Countries',   icon: '🌍' },
-  { value: '5',    label: 'Regions',     icon: '🗺️' },
-  { value: '7K+',  label: 'Languages',   icon: '💬' },
-  { value: '180+', label: 'Currencies',  icon: '💰' },
+  { value: '195+', label: 'Countries' },
+  { value: '5',    label: 'Regions'   },
+  { value: '7,000+', label: 'Languages'},
+  { value: '180+', label: 'Currencies'},
 ];
 
 const FEATURES = [
   {
-    icon: '🔍',
+    num: '01',
     title: 'Search & Explore',
-    desc: 'Instantly browse all 195+ countries. Filter by region, search by name or capital, and discover in seconds.',
+    desc: 'Browse all 195+ countries. Filter by region, search by name or capital, and jump straight to any nation in seconds.',
     to: '/explore',
-    cta: 'Start exploring',
-    color: 'indigo',
+    cta: 'Go to Explore',
   },
   {
-    icon: '⚖️',
-    title: 'Side-by-Side Compare',
-    desc: 'Pick any two nations and compare population, area, language, currency, timezones, and borders in one view.',
+    num: '02',
+    title: 'Compare Side by Side',
+    desc: 'Select any two countries and see their population, area, language, currency, and borders compared in one clean view.',
     to: '/compare',
-    cta: 'Compare now',
-    color: 'emerald',
+    cta: 'Go to Compare',
   },
   {
-    icon: '★',
-    title: 'Personal Favorites',
-    desc: 'Save the countries that matter to you. Add private notes, revisit anytime from your personal dashboard.',
+    num: '03',
+    title: 'Save Your Favorites',
+    desc: 'Sign up to bookmark countries you care about and attach personal notes to each one. Your own reference list.',
     to: '/register',
     toAuth: '/favorites',
     cta: 'Create account',
-    ctaAuth: 'My favorites',
-    color: 'amber',
+    ctaAuth: 'My Favorites',
   },
 ];
 
 export default function HomePage() {
   const { user } = useAuth();
+
   return (
     <div className="home">
 
-      {/* ── Hero ── */}
-      <section className="hero">
-        <div className="hero-glow hero-glow-1" />
-        <div className="hero-glow hero-glow-2" />
-        <div className="hero-glow hero-glow-3" />
+      {/* ── Hero ─────────────────────────────── */}
+      <section className="home-hero">
+        <div className="container home-hero-inner">
 
-        <div className="container hero-inner">
-          <div className="hero-badge fade-up">
-            <span className="hero-badge-dot" />
-            Powered by REST Countries API
+          <div className="home-hero-left">
+            <p className="home-kicker">REST Countries API · IT 301 Final Project</p>
+            <h1 className="home-h1">
+              Explore every<br />
+              country on Earth.
+            </h1>
+            <p className="home-sub">
+              Detailed profiles on 195+ nations — populations, capitals,
+              currencies, languages, flags, borders and more.
+              Compare any two countries and build your own collection.
+            </p>
+            <div className="home-cta-row">
+              <Link to="/explore" className="btn btn-primary btn-lg">Start exploring</Link>
+              {!user && <Link to="/register" className="btn btn-ghost btn-lg">Sign up free</Link>}
+            </div>
           </div>
 
-          <h1 className="hero-h1 fade-up" style={{animationDelay:'0.08s'}}>
-            The world's data,<br />
-            <span className="gradient-text">beautifully explored</span>
-          </h1>
-
-          <p className="hero-p fade-up" style={{animationDelay:'0.16s'}}>
-            Discover detailed profiles on 195+ countries — populations, capitals,
-            currencies, languages, borders &amp; more. Compare nations and build your own collection.
-          </p>
-
-          <div className="hero-cta fade-up" style={{animationDelay:'0.24s'}}>
-            <Link to="/explore" className="btn btn-primary btn-lg">
-              <span>Explore countries</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </Link>
-            {!user && (
-              <Link to="/register" className="btn btn-secondary btn-lg">Sign up free</Link>
-            )}
-          </div>
-
-          {/* Floating stat pills */}
-          <div className="hero-pills fade-up" style={{animationDelay:'0.32s'}}>
+          <div className="home-hero-right">
             {STATS.map(s => (
-              <div key={s.label} className="hero-pill">
-                <span className="hero-pill-icon">{s.icon}</span>
-                <strong>{s.value}</strong>
-                <span>{s.label}</span>
+              <div key={s.label} className="home-stat">
+                <span className="home-stat-val">{s.value}</span>
+                <span className="home-stat-label">{s.label}</span>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* ── Features ── */}
-      <section className="section container">
-        <div className="section-header">
-          <p className="eyebrow"><span className="eyebrow-dot"/>Everything you need</p>
-          <h2 className="section-h2">One app. All the world's data.</h2>
-          <p className="section-sub">Three powerful tools that work together to help you learn about any country on Earth.</p>
-        </div>
+      {/* ── Divider ── */}
+      <div className="container"><div className="divider" /></div>
 
-        <div className="features-grid">
-          {FEATURES.map((f, i) => (
-            <div key={f.title} className={`feature-card feature-card-${f.color} fade-up`} style={{animationDelay:`${i*0.08}s`}}>
-              <div className="feature-icon-box">{f.icon}</div>
-              <h3 className="feature-h3">{f.title}</h3>
-              <p className="feature-p">{f.desc}</p>
-              <Link
-                to={user && f.toAuth ? f.toAuth : f.to}
-                className="feature-link"
-              >
-                {user && f.ctaAuth ? f.ctaAuth : f.cta}
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </Link>
+      {/* ── Features ─────────────────────────── */}
+      <section className="home-features container">
+        {FEATURES.map((f, i) => (
+          <div key={f.num} className="home-feature fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
+            <span className="home-feature-num">{f.num}</span>
+            <div className="home-feature-body">
+              <h3 className="home-feature-title">{f.title}</h3>
+              <p className="home-feature-desc">{f.desc}</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      {!user && (
-        <section className="section container">
-          <div className="cta-card">
-            <div className="cta-glow" />
-            <div className="cta-body">
-              <p className="eyebrow"><span className="eyebrow-dot"/>Free forever</p>
-              <h2 className="cta-h2">Start exploring the world today</h2>
-              <p className="cta-p">Create a free account in seconds to unlock favorites, personal notes, and your own country collection.</p>
-              <div className="cta-actions">
-                <Link to="/register" className="btn btn-primary btn-lg">Create free account</Link>
-                <Link to="/explore"  className="btn btn-secondary btn-lg">Browse first</Link>
-              </div>
-            </div>
+            <Link
+              to={user && f.toAuth ? f.toAuth : f.to}
+              className="home-feature-link"
+            >
+              {user && f.ctaAuth ? f.ctaAuth : f.cta} →
+            </Link>
           </div>
-        </section>
+        ))}
+      </section>
+
+      {/* ── CTA ───────────────────────────────── */}
+      {!user && (
+        <>
+          <div className="container"><div className="divider" /></div>
+          <section className="home-cta-section container">
+            <div className="home-cta-left">
+              <h2 className="home-cta-h2">Ready to get started?</h2>
+              <p className="home-cta-p">Create a free account to save favorites and add personal notes to any country.</p>
+            </div>
+            <div className="home-cta-right">
+              <Link to="/register" className="btn btn-primary btn-lg">Create free account</Link>
+              <Link to="/explore"  className="btn btn-ghost btn-lg">Browse first</Link>
+            </div>
+          </section>
+        </>
       )}
 
-      <div className="home-footer-spacer" />
+      <div style={{ height: 80 }} />
     </div>
   );
 }

@@ -1,85 +1,68 @@
 .cmp-page { padding: 48px 0 80px; }
 
-.cmp-head { margin-bottom: 28px; }
-.cmp-title { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; }
-.cmp-sub   { color: var(--txt-3); font-size: 15px; margin-top: 6px; }
+.cmp-head { padding-bottom: 24px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+.cmp-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.cmp-sub   { color: var(--txt-3); font-size: 14px; margin-top: 5px; }
 
-/* Selector card */
 .cmp-selector-card {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 20px;
-  align-items: flex-end;
-  padding: 28px 32px;
-  border-radius: var(--r-xl);
-  background: var(--surface-1);
+  grid-template-columns: 1fr 120px 1fr;
+  gap: 16px; align-items: flex-end;
+  padding: 24px;
+  border-radius: var(--r-lg);
+  background: var(--bg-1);
   border: 1px solid var(--border);
   margin-bottom: 8px;
 }
 
-.cmp-selector-group { display: flex; flex-direction: column; gap: 8px; }
-
+.cmp-selector-group { display: flex; flex-direction: column; gap: 7px; }
 .cmp-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
   color: var(--txt-3);
 }
 
 .cmp-select {
-  width: 100%;
-  appearance: none;
-  background: var(--surface-2);
-  border: 1px solid var(--border-2);
+  width: 100%; appearance: none;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
   border-radius: var(--r-md);
   color: var(--txt-1);
-  padding: 12px 16px;
-  font-size: 14px;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
-  transition: all var(--t-base) var(--ease);
+  padding: 11px 14px;
+  font-size: 14px; font-family: var(--sans); font-weight: 500;
+  cursor: pointer; outline: none;
+  transition: border-color var(--t) var(--ease);
 }
-.cmp-select:hover { border-color: rgba(255,255,255,0.15); }
-.cmp-select:focus { border-color: rgba(99,102,241,0.45); box-shadow: 0 0 0 3px var(--glow-brand); }
+.cmp-select:hover { border-color: var(--border-2); }
+.cmp-select:focus { border-color: rgba(99,102,241,0.4); box-shadow: 0 0 0 3px rgba(99,102,241,0.08); }
 .cmp-select option { background: var(--bg-1); }
 
 .cmp-vs-col {
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
 }
 .cmp-vs-badge {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: rgba(99,102,241,0.10);
-  border: 1px solid rgba(99,102,241,0.25);
-  color: var(--indigo-light);
-  font-size: 11px;
-  font-weight: 800;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--txt-3);
+  font-size: 11px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
 
-.cmp-warn {
-  font-size: 13px;
-  color: var(--amber);
-  text-align: center;
-  margin-bottom: 8px;
-}
+.cmp-warn { font-size: 13px; color: var(--amber); text-align: center; margin-bottom: 8px; }
 
-/* Empty state */
 .cmp-empty {
-  text-align: center;
-  padding: 100px 20px;
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  text-align: center; padding: 100px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
 }
-.cmp-empty-icon { font-size: 52px; }
-.cmp-empty h3   { font-size: 20px; color: var(--txt-2); }
-.cmp-empty p    { color: var(--txt-3); font-size: 15px; max-width: 380px; line-height: 1.7; }
+.cmp-empty-icon { font-size: 44px; opacity: 0.4; }
+.cmp-empty h3   { font-size: 18px; font-weight: 600; color: var(--txt-2); }
+.cmp-empty p    { color: var(--txt-3); font-size: 14px; max-width: 360px; line-height: 1.7; }
 .cmp-empty strong { color: var(--txt-2); }
 
 @media (max-width: 640px) {
-  .cmp-selector-card { grid-template-columns: 1fr; padding: 24px 20px; }
+  .cmp-selector-card { grid-template-columns: 1fr; }
   .cmp-vs-col { flex-direction: row; justify-content: center; }
   .cmp-vs-badge { display: none; }
 }
