@@ -41,6 +41,42 @@
   justify-self: center;
 }
 
+/* Numeric bar comparisons */
+.cp-bars {
+  padding: 20px 28px;
+  display: flex; flex-direction: column; gap: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cp-bar-row { display: flex; flex-direction: column; gap: 8px; }
+
+.cp-bar-label-row {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 12px;
+}
+.cp-bar-val {
+  font-size: 15px; font-weight: 600; color: var(--txt-2);
+  display: flex; align-items: center; gap: 5px;
+}
+.cp-bar-val-b { justify-content: flex-end; text-align: right; }
+.cp-bar-val.cp-winner { color: var(--txt-1); }
+.cp-crown { font-size: 10px; color: var(--accent); }
+
+.cp-bar-metric {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--txt-3); text-align: center;
+  white-space: nowrap;
+}
+
+.cp-bar-track {
+  display: flex; height: 6px; border-radius: 99px;
+  overflow: hidden; background: var(--surface-1);
+  gap: 2px;
+}
+.cp-bar-fill { height: 100%; border-radius: 99px; transition: width 0.6s var(--ease); }
+.cp-bar-a { background: var(--accent); opacity: 0.8; }
+.cp-bar-b { background: var(--emerald); opacity: 0.8; }
+
 /* Table */
 .cp-table { padding: 4px 28px 24px; }
 
@@ -72,4 +108,5 @@
   .cp-label { text-align: left; }
   .cp-cell-a, .cp-cell-b { text-align: left; }
   .cp-table { padding: 4px 20px 20px; }
+  .cp-bars { padding: 16px 20px; }
 }

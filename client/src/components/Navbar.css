@@ -35,7 +35,7 @@
 /* Nav links */
 .navbar-links {
   display: flex; align-items: center; gap: 0;
-  flex: 1; justify-content: center;
+  flex: 1; justify-content: flex-end;
 }
 
 .nav-link {
@@ -64,22 +64,87 @@
   display: flex; align-items: center; gap: 8px;
 }
 
+.nav-profile-wrap { position: relative; }
+
 .nav-user-pill {
   display: flex; align-items: center; gap: 8px;
-  padding: 4px 12px 4px 4px;
+  padding: 4px 10px 4px 4px;
   border-radius: var(--r-full);
   background: var(--surface-1);
   border: 1px solid var(--border);
   font-size: 13px; font-weight: 500; color: var(--txt-2);
+  transition: all var(--t) var(--ease);
+  cursor: pointer;
 }
+.nav-user-pill:hover,
+.nav-user-pill.active { border-color: var(--border-2); color: var(--txt-1); background: var(--surface-2); }
+
 .nav-avatar {
-  width: 24px; height: 24px;
+  width: 26px; height: 26px;
   border-radius: 50%;
   background: var(--accent);
   display: flex; align-items: center; justify-content: center;
   font-size: 10px; font-weight: 700; color: #fff;
   flex-shrink: 0;
 }
+.nav-username { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-chevron { color: var(--txt-3); transition: transform var(--t) var(--ease); flex-shrink: 0; }
+.nav-chevron.rotated { transform: rotate(180deg); }
+
+/* Profile dropdown */
+.nav-profile-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  width: 240px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  padding: 8px;
+  animation: fadeUp 0.15s var(--ease) both;
+  z-index: 300;
+}
+
+.npd-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 10px 12px;
+}
+.npd-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.npd-user-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.npd-name  { font-size: 14px; font-weight: 600; color: var(--txt-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.npd-email { font-size: 12px; color: var(--txt-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.npd-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+.npd-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 9px 10px;
+  border-radius: var(--r-md);
+  font-size: 13px; font-weight: 500; color: var(--txt-2);
+  background: transparent; border: none;
+  transition: all var(--t) var(--ease);
+  cursor: pointer; text-align: left;
+}
+.npd-item:hover { background: var(--surface-1); color: var(--txt-1); }
+.npd-item svg { flex-shrink: 0; color: var(--txt-3); }
+.npd-item span:first-of-type { flex: 1; }
+
+.npd-badge {
+  min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: var(--r-full);
+  background: rgba(99,102,241,0.15);
+  color: var(--accent);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.npd-signout { color: var(--rose); }
+.npd-signout:hover { background: rgba(244,63,94,0.08); color: var(--rose); }
+.npd-signout svg { color: var(--rose); }
 
 /* Hamburger */
 .hamburger {

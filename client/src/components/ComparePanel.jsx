@@ -2,10 +2,8 @@ import { formatPopulation, formatArea, getCurrencies, getLanguages, getCapital }
 import CountryGlobe from './CountryGlobe';
 import './ComparePanel.css';
 
-const ROWS = [
+const TEXT_ROWS = [
   { label: 'Capital',    fn: c => getCapital(c.capital) },
-  { label: 'Population', fn: c => formatPopulation(c.population) },
-  { label: 'Area',       fn: c => formatArea(c.area) },
   { label: 'Region',     fn: c => c.region || '—' },
   { label: 'Subregion',  fn: c => c.subregion || '—' },
   { label: 'Languages',  fn: c => getLanguages(c.languages) },
@@ -15,6 +13,37 @@ const ROWS = [
   { label: 'TLD',        fn: c => c.tld?.join(', ') || '—' },
   { label: 'Borders',    fn: c => c.borders?.length ? c.borders.join(', ') : 'None' },
 ];
+
+const NUMERIC_ROWS = [
+  { label: 'Population', key: 'population', fmt: formatPopulation, higher: 'larger' },
+  { label: 'Area',       key: 'area',       fmt: v => formatArea(v), higher: 'larger' },
+];
+
+function BarRow({ label, valA, valB, fmtA, fmtB }) {
+  const total = valA + valB || 1;
+  const pctA = Math.round((valA / total) * 100);
+  const pctB = 100 - pctA;
+  const winA = valA > valB;
+  const winB = valB > valA;
+
+  return (
+    <div className="cp-bar-row">
+      <div className="cp-bar-label-row">
+        <span className={`cp-bar-val${winA ? ' cp-winner' : ''}`}>
+          {winA && <span className="cp-crown">▲</span>}{fmtA}
+        </span>
+        <span className="cp-bar-metric">{label}</span>
+        <span className={`cp-bar-val cp-bar-val-b${winB ? ' cp-winner' : ''}`}>
+          {fmtB}{winB && <span className="cp-crown">▲</span>}
+        </span>
+      </div>
+      <div className="cp-bar-track">
+        <div className="cp-bar-fill cp-bar-a" style={{ width: `${pctA}%` }} />
+        <div className="cp-bar-fill cp-bar-b" style={{ width: `${pctB}%` }} />
+      </div>
+    </div>
+  );
+}
 
 export default function ComparePanel({ countryA, countryB }) {
   if (!countryA || !countryB) return null;
@@ -44,9 +73,23 @@ export default function ComparePanel({ countryA, countryB }) {
         </div>
       </div>
 
-      {/* Table */}
+      {/* Numeric bar comparisons */}
+      <div className="cp-bars">
+        {NUMERIC_ROWS.map(({ label, key, fmt }) => (
+          <BarRow
+            key={label}
+            label={label}
+            valA={countryA[key] || 0}
+            valB={countryB[key] || 0}
+            fmtA={fmt(countryA[key])}
+            fmtB={fmt(countryB[key])}
+          />
+        ))}
+      </div>
+
+      {/* Text rows table */}
       <div className="cp-table">
-        {ROWS.map(({ label, fn }) => (
+        {TEXT_ROWS.map(({ label, fn }) => (
           <div key={label} className="cp-row">
             <span className="cp-cell cp-cell-a">{fn(countryA)}</span>
             <span className="cp-label">{label}</span>

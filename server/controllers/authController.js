@@ -116,4 +116,39 @@ const getMe = (req, res) => {
   });
 };
 
-module.exports = { register, login, getMe };
+// PATCH /api/auth/update
+const updateProfile = async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
+    const user = db.get('users').find({ id: req.user.id }).value();
+    if (!user) return res.status(404).json({ success: false, message: 'User not found.' });
+
+    if (email && email !== user.email) {
+      const existing = db.get('users').find({ email }).value();
+      if (existing && existing.id !== user.id) {
+        return res.status(409).json({ success: false, message: 'Email already in use.' });
+      }
+    }
+
+    const updates = {};
+    if (username) updates.username = username;
+    if (email)    updates.email    = email;
+    if (password) {
+      if (password.length < 6) return res.status(400).json({ success: false, message: 'Password must be at least 6 characters.' });
+      updates.password = await bcrypt.hash(password, 12);
+    }
+
+    db.get('users').find({ id: req.user.id }).assign(updates).write();
+
+    const updated = db.get('users').find({ id: req.user.id }).value();
+    return res.status(200).json({
+      success: true,
+      message: 'Profile updated.',
+      user: { id: updated.id, username: updated.username, email: updated.email }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getMe, updateProfile };

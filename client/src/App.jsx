@@ -10,6 +10,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AboutPage from './pages/AboutPage';
+import ProfilePage from './pages/ProfilePage';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -31,6 +32,9 @@ function AppRoutes() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/favorites" element={
           <ProtectedRoute><FavoritesPage /></ProtectedRoute>
+        } />
+        <Route path="/profile" element={
+          <ProtectedRoute><ProfilePage /></ProtectedRoute>
         } />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
