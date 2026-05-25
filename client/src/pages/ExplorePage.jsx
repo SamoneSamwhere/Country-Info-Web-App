@@ -1,37 +1,27 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getAllCountries, searchByName, getByRegion } from '../services/countriesService';
+import { getAllCountries } from '../services/countriesService';
 import CountryCard from '../components/CountryCard';
 import SearchBar from '../components/SearchBar';
 import FilterDropdown from '../components/FilterDropdown';
 import './ExplorePage.css';
 
 export default function ExplorePage() {
-  const [allCountries, setAllCountries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [all, setAll]       = useState([]);
+  const [loading, setLoad]  = useState(true);
+  const [error, setError]   = useState('');
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState('');
 
   useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      try {
-        const data = await getAllCountries();
-        setAllCountries(data);
-      } catch {
-        setError('Failed to load countries. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
+    setLoad(true);
+    getAllCountries()
+      .then(setAll)
+      .catch(() => setError('Could not load countries. Check your connection.'))
+      .finally(() => setLoad(false));
   }, []);
 
   const filtered = useMemo(() => {
-    let list = allCountries;
-    if (region) {
-      list = list.filter(c => c.region === region);
-    }
+    let list = region ? all.filter(c => c.region === region) : all;
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(c =>
@@ -40,41 +30,55 @@ export default function ExplorePage() {
         c.capital?.[0]?.toLowerCase().includes(q)
       );
     }
-    return list.sort((a, b) => a.name?.common?.localeCompare(b.name?.common));
-  }, [allCountries, search, region]);
+    return [...list].sort((a,b) => a.name?.common?.localeCompare(b.name?.common));
+  }, [all, search, region]);
+
+  const clear = () => { setSearch(''); setRegion(''); };
 
   return (
     <div className="explore-page container">
-      <div className="explore-header">
+
+      {/* Header */}
+      <div className="explore-head">
         <div>
           <h1 className="explore-title">Explore Countries</h1>
-          <p className="explore-sub">
-            {loading ? 'Loading...' : `${filtered.length} countries found`}
+          <p className="explore-meta">
+            {loading ? 'Loading…' : <><strong className="explore-count">{filtered.length}</strong> {filtered.length === 1 ? 'country' : 'countries'} found</>}
           </p>
         </div>
         <div className="explore-controls">
-          <SearchBar value={search} onChange={setSearch} placeholder="Search by name or capital..." />
+          <SearchBar value={search} onChange={setSearch} placeholder="Search country or capital…" />
           <FilterDropdown value={region} onChange={setRegion} />
         </div>
       </div>
 
-      {error && <div className="error-box">{error}</div>}
+      {/* Active filters */}
+      {(search || region) && (
+        <div className="explore-filters">
+          {search && <span className="filter-chip">"{search}" <button onClick={() => setSearch('')}>✕</button></span>}
+          {region && <span className="filter-chip">{region} <button onClick={() => setRegion('')}>✕</button></span>}
+          <button className="filter-clear" onClick={clear}>Clear all</button>
+        </div>
+      )}
+
+      {error && (
+        <div className="explore-error">
+          <span>⚠️</span> {error}
+        </div>
+      )}
 
       {loading ? (
-        <div className="spinner" />
+        <div className="spinner-wrap"><div className="spinner" /><span className="spinner-text">Loading countries…</span></div>
       ) : filtered.length === 0 ? (
-        <div className="empty-state">
-          <span>🌐</span>
-          <p>No countries found matching your search.</p>
-          <button className="btn btn-ghost" onClick={() => { setSearch(''); setRegion(''); }}>
-            Clear Filters
-          </button>
+        <div className="explore-empty">
+          <div className="explore-empty-icon">🌐</div>
+          <h3>No countries found</h3>
+          <p>Try adjusting your search or filters.</p>
+          <button className="btn btn-secondary" onClick={clear}>Clear filters</button>
         </div>
       ) : (
         <div className="grid grid-4">
-          {filtered.map(c => (
-            <CountryCard key={c.cca3} country={c} />
-          ))}
+          {filtered.map(c => <CountryCard key={c.cca3} country={c} />)}
         </div>
       )}
     </div>

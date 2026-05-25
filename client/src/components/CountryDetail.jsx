@@ -1,91 +1,99 @@
 import { useAuth } from '../context/AuthContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { formatPopulation, formatArea, getCurrencies, getLanguages, getCapital } from '../utils/formatters';
+import CountryGlobe from './CountryGlobe';
 import './CountryDetail.css';
+
+const InfoRow = ({ label, value }) => (
+  <div className="cd-row">
+    <span className="cd-row-label">{label}</span>
+    <span className="cd-row-value">{value || '—'}</span>
+  </div>
+);
 
 export default function CountryDetail({ country }) {
   const { user } = useAuth();
   const { isFavorite, addFavorite, removeFavorite, getFavoriteId } = useFavorites();
-
   if (!country) return null;
 
   const code = country.cca3;
-  const fav = isFavorite(code);
+  const fav  = isFavorite(code);
 
-  const handleFavToggle = async () => {
+  const toggle = async () => {
     if (!user) return;
-    try {
-      if (fav) {
-        await removeFavorite(getFavoriteId(code));
-      } else {
-        await addFavorite(country);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    try { fav ? await removeFavorite(getFavoriteId(code)) : await addFavorite(country); }
+    catch {}
   };
 
   return (
-    <div className="country-detail fade-up">
-      <div className="detail-hero">
-        <div className="detail-flag">
-          <img
-            src={country.flags?.svg || country.flags?.png}
-            alt={`Flag of ${country.name?.common}`}
-          />
+    <article className="cd fade-up">
+
+      {/* ── Hero banner ── */}
+      <div className="cd-hero">
+        <div className="cd-hero-flag">
+          <img src={country.flags?.svg || country.flags?.png} alt={`Flag of ${country.name?.common}`} />
         </div>
-        <div className="detail-headline">
-          <h1 className="detail-name">{country.name?.common}</h1>
-          {country.name?.official && (
-            <p className="detail-official">{country.name.official}</p>
-          )}
-          <div className="detail-badges">
-            <span className="badge">{country.region}</span>
-            {country.subregion && <span className="badge">{country.subregion}</span>}
+        <div className="cd-hero-info">
+          <div className="cd-chips">
+            {country.region   && <span className="badge badge-indigo">{country.region}</span>}
+            {country.subregion&& <span className="badge badge-emerald">{country.subregion}</span>}
           </div>
+          <h1 className="cd-name">{country.name?.common}</h1>
+          {country.name?.official && <p className="cd-official">{country.name.official}</p>}
           {user && (
-            <button
-              className={`btn ${fav ? 'btn-warning' : 'btn-ghost'} fav-toggle-btn`}
-              onClick={handleFavToggle}
-            >
-              {fav ? '★ Remove Favorite' : '☆ Add to Favorites'}
+            <button className={`btn btn-sm cd-fav-btn${fav ? ' cd-fav-active' : ''}`} onClick={toggle}>
+              {fav ? '★ Saved' : '☆ Save to favorites'}
             </button>
           )}
         </div>
       </div>
 
-      <div className="detail-grid">
-        <div className="detail-card">
-          <h3>🏛️ General</h3>
-          <div className="detail-rows">
-            <div className="detail-row"><span>Capital</span><strong>{getCapital(country.capital)}</strong></div>
-            <div className="detail-row"><span>Population</span><strong>{formatPopulation(country.population)}</strong></div>
-            <div className="detail-row"><span>Area</span><strong>{formatArea(country.area)}</strong></div>
-            <div className="detail-row"><span>Continent</span><strong>{country.continents?.join(', ') || 'N/A'}</strong></div>
-            <div className="detail-row"><span>Top-Level Domain</span><strong>{country.tld?.join(', ') || 'N/A'}</strong></div>
+      {/* ── Globe ── */}
+      {country.latlng && (
+        <div className="cd-globe">
+          <CountryGlobe countries={[country]} height={340} />
+        </div>
+      )}
+
+      {/* ── Info grid ── */}
+      <div className="cd-grid">
+
+        <div className="cd-card">
+          <div className="cd-card-head"><span>🏛️</span> General</div>
+          <div className="cd-rows">
+            <InfoRow label="Capital"        value={getCapital(country.capital)} />
+            <InfoRow label="Population"     value={formatPopulation(country.population)} />
+            <InfoRow label="Area"           value={formatArea(country.area)} />
+            <InfoRow label="Continent"      value={country.continents?.join(', ')} />
+            <InfoRow label="Top-Level Domain" value={country.tld?.join(', ')} />
           </div>
         </div>
 
-        <div className="detail-card">
-          <h3>💬 Culture</h3>
-          <div className="detail-rows">
-            <div className="detail-row"><span>Languages</span><strong>{getLanguages(country.languages)}</strong></div>
-            <div className="detail-row"><span>Currencies</span><strong>{getCurrencies(country.currencies)}</strong></div>
-            <div className="detail-row"><span>Timezones</span><strong>{country.timezones?.slice(0, 3).join(', ')}{country.timezones?.length > 3 ? '...' : ''}</strong></div>
+        <div className="cd-card">
+          <div className="cd-card-head"><span>💬</span> Culture</div>
+          <div className="cd-rows">
+            <InfoRow label="Languages"  value={getLanguages(country.languages)} />
+            <InfoRow label="Currencies" value={getCurrencies(country.currencies)} />
+            <InfoRow label="Timezones"  value={
+              country.timezones?.length
+                ? country.timezones.slice(0,3).join(', ') + (country.timezones.length > 3 ? '…' : '')
+                : null
+            }/>
           </div>
         </div>
 
-        {country.borders && country.borders.length > 0 && (
-          <div className="detail-card detail-card-wide">
-            <h3>🗺️ Bordering Countries</h3>
-            <div className="border-tags">
+        {country.borders?.length > 0 && (
+          <div className="cd-card cd-card-wide">
+            <div className="cd-card-head"><span>🗺️</span> Borders with</div>
+            <div className="cd-borders">
               {country.borders.map(b => (
-                <span key={b} className="badge border-tag">{b}</span>
+                <span key={b} className="cd-border-tag">{b}</span>
               ))}
             </div>
           </div>
         )}
+
       </div>
-    </div>
+    </article>
   );
 }

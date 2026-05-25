@@ -1,4 +1,12 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "751f9c44-8e93-4d88-9096-e2e88914798c",
+      "username": "princechristianparnada@gmail.com",
+      "email": "princechristianparnada@gmail.com",
+      "password": "$2a$12$4rIBBdSHRClXfJxYMFRp1.MNGp8iVccTnLH7WYmwCwab/yVpypwXq",
+      "createdAt": "2026-05-23T01:59:43.001Z"
+    }
+  ],
   "favorites": []
 }

@@ -1,0 +1,27 @@
+.country-page { padding: 32px 0 0; }
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--txt-2);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  margin-bottom: 28px;
+  transition: all var(--t-base) var(--ease);
+}
+.back-btn:hover { background: var(--surface-2); color: var(--txt-1); border-color: var(--border-2); transform: translateX(-2px); }
+
+.country-not-found {
+  text-align: center;
+  padding: 100px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.country-not-found span { font-size: 52px; }
+.country-not-found h3 { font-size: 22px; color: var(--txt-2); }
+.country-not-found p  { color: var(--rose); font-size: 14px; }

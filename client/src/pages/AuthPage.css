@@ -1,103 +1,89 @@
 .auth-page {
   min-height: calc(100vh - 64px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 20px;
+  position: relative;
+}
+.auth-page::before {
+  content: '';
+  position: fixed;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .auth-card {
-  width: 100%;
-  max-width: 440px;
-  padding: 40px;
-  animation: fadeUp 0.4s ease;
+  width: 100%; max-width: 420px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-2xl);
+  padding: 44px 40px;
+  position: relative;
+  overflow: hidden;
+  animation: scaleIn var(--t-slow) var(--ease-spring) both;
+}
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--grad-brand);
 }
 
 .auth-logo {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.auth-title {
-  font-size: 26px;
-  font-weight: 800;
-  text-align: center;
-  letter-spacing: -0.5px;
-}
-
-.auth-sub {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 14px;
-  margin-top: 6px;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
   margin-bottom: 28px;
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 700;
+  color: var(--txt-1);
+  letter-spacing: -0.02em;
 }
+.auth-logo-icon {
+  width: 30px; height: 30px;
+  background: var(--grad-brand);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.auth-logo-text span { color: var(--indigo-light); }
+
+.auth-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; text-align: center; margin-bottom: 6px; }
+.auth-sub   { text-align: center; color: var(--txt-3); font-size: 14px; margin-bottom: 32px; line-height: 1.6; }
 
 .auth-error {
-  background: rgba(255, 77, 109, 0.12);
-  border: 1px solid var(--danger);
-  border-radius: var(--radius-sm);
-  color: var(--danger);
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(244,63,94,0.07);
+  border: 1px solid rgba(244,63,94,0.22);
+  border-radius: var(--r-md);
+  color: var(--rose);
   padding: 12px 14px;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-.form-input {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  padding: 12px 14px;
-  font-size: 15px;
-  outline: none;
-  transition: var(--transition);
-  width: 100%;
+.auth-form   { display: flex; flex-direction: column; gap: 18px; }
+.form-group  { display: flex; flex-direction: column; gap: 7px; }
+.form-label  {
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--txt-3);
 }
-.form-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-.form-input::placeholder { color: var(--text-muted); }
 
 .auth-submit {
   width: 100%;
-  justify-content: center;
   padding: 13px;
   font-size: 15px;
+  border-radius: var(--r-md);
   margin-top: 4px;
 }
 
 .auth-switch {
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 24px;
+  text-align: center; font-size: 13px;
+  color: var(--txt-3); margin-top: 24px;
 }
-.auth-switch a {
-  color: var(--accent);
-  font-weight: 500;
-}
-.auth-switch a:hover { opacity: 0.8; }
+.auth-switch a { color: var(--indigo-light); font-weight: 600; }
+.auth-switch a:hover { text-decoration: underline; }
+
+@media (max-width: 440px) { .auth-card { padding: 36px 24px; } }
