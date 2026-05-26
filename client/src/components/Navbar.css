@@ -1,11 +1,12 @@
 .navbar {
   position: sticky; top: 0; z-index: 200;
   height: 60px;
-  /* Barely-there background — you can see the page through it */
   background: rgba(8, 8, 16, 0.82);
   backdrop-filter: blur(20px) saturate(160%);
   border-bottom: 1px solid var(--border);
+  transition: background var(--t) var(--ease), border-color var(--t) var(--ease);
 }
+[data-theme="light"] .navbar { background: rgba(245,245,247,0.88); }
 
 .navbar-inner {
   height: 100%;
@@ -58,6 +59,19 @@
   background: var(--accent);
   border-radius: 50%;
 }
+
+/* Theme toggle */
+.nav-theme-btn {
+  width: 34px; height: 34px;
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--txt-2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--t) var(--ease);
+  flex-shrink: 0;
+}
+.nav-theme-btn:hover { color: var(--txt-1); border-color: var(--border-2); background: var(--surface-2); }
 
 /* Auth */
 .nav-auth {
@@ -168,7 +182,7 @@
     display: none;
     position: absolute; top: 60px; left: 0; right: 0;
     flex-direction: column; align-items: stretch; justify-content: flex-start;
-    background: rgba(8,8,16,0.97);
+    background: var(--bg-1);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 12px 20px 20px; gap: 2px;
